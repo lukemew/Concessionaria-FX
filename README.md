@@ -1,7 +1,3 @@
-Aqui está um README atualizado para o seu projeto de concessionária, seguindo o modelo que você forneceu, mas adaptado para refletir as tecnologias e funcionalidades específicas que você implementou:
-
----
-
 # TOPcar - Concessionária
 
 Este projeto é uma aplicação de gerenciamento de concessionária de veículos, onde vendedores podem adicionar, editar e deletar informações sobre veículos e clientes. A aplicação é desenvolvida utilizando Java e JavaFX para a interface gráfica, proporcionando uma experiência de usuário moderna e intuitiva.
