@@ -7,8 +7,14 @@ public class Veiculo {
     private String cor;
     private double preco;
 
-
     public Veiculo() {}
+
+    public Veiculo(int ano, String modelo, String cor, double preco) {
+        this.ano = ano;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.preco = preco;
+    }
 
     public int getId() {
         return id;
@@ -16,15 +22,6 @@ public class Veiculo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Veiculo(int id, int ano, String modelo, String cor, double preco) {
-        this.id = id;
-        this.ano = ano;
-        this.modelo = modelo;
-        this.cor = cor;
-        this.preco = preco;
-
     }
 
     public double getPreco() {

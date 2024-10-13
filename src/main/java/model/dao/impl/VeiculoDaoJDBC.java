@@ -22,12 +22,14 @@ public class VeiculoDaoJDBC implements VeiculoDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                    "INSERT INTO veiculos (modelo, ano, cor) VALUES (?, ?, ?)",  // Mudança no nome da tabela
+                    "INSERT INTO veiculos (id, modelo, ano, cor, preco) VALUES (?, ?, ?, ?, ?)",  // Mudança no nome da tabela
                     Statement.RETURN_GENERATED_KEYS);
 
-            st.setString(1, veiculo.getModelo());
-            st.setInt(2, veiculo.getAno());
-            st.setString(3, veiculo.getCor());
+            st.setInt(1, veiculo.getId());
+            st.setString(2, veiculo.getModelo());
+            st.setInt(3, veiculo.getAno());
+            st.setString(4, veiculo.getCor());
+            st.setDouble(5, veiculo.getPreco());
 
             int rowsAffected = st.executeUpdate();
 

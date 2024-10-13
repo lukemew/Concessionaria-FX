@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="060dfafc-bc6b-413b-bba8-aa5fcb31f8ae" name="Changes" comment="" />
+    <list default="true" id="060dfafc-bc6b-413b-bba8-aa5fcb31f8ae" name="Changes" comment="Adicionando os atributos preço e id que até então faltava à interface">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/bmw_serie3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/bmw_série_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/honda_civic2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/honda_civic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/toyotacorolla.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/toyota_corolla.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Veiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Veiculo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/entities/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/entities/Carro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/impl/VeiculoDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/impl/VeiculoDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/program/TelaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/program/TelaCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/program/TelaVendedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/program/TelaVendedor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,24 +26,68 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lukemew&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lukemew/Concessionaria-FX.git&quot;,
+    &quot;accountId&quot;: &quot;831d6c01-c58f-4a35-ac2f-70ee854df5a3&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2nLHLKRj4KnB1EqsFXgyCpdLSwX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TelaCliente.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TelaLogin.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TelaVendedor.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TelaVendedorFX.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;zulu-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lucas/IdeaProjects/Concessionaria-FX&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\IdeaProjects\Concessionaria-FX" />
+      <recent name="C:\Users\lucas\IdeaProjects\Concessionaria-FX\src\main\java" />
+      <recent name="C:\Users\lucas\IdeaProjects\Concessionaria-FX\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\IdeaProjects\Concessionaria-FX\src\main\java" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -44,11 +104,45 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728745381257</updated>
-      <workItem from="1728745382282" duration="2000" />
+      <workItem from="1728745382282" duration="7989000" />
+      <workItem from="1728832508584" duration="6911000" />
     </task>
+    <task id="LOCAL-00001" summary="Alterações na interface JavaFX">
+      <option name="closed" value="true" />
+      <created>1728832680730</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728832680730</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adicionando os atributos preço e id que até então faltava à interface">
+      <option name="closed" value="true" />
+      <created>1728836519208</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728836519208</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Alterações na interface JavaFX" />
+    <MESSAGE value="Adicionando os atributos preço e id que até então faltava à interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionando os atributos preço e id que até então faltava à interface" />
   </component>
 </project>
