@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Veiculo;
@@ -15,7 +17,7 @@ import java.util.List;
 public class TelaVendedor extends Application {
 
     private ComboBox<String> comboVeiculos;
-    private TextField txtModelo, txtAno, txtCor;
+    private TextField txtModelo, txtAno, txtCor, txtPreco;
     private Button btnAdicionar, btnEditar, btnDeletar, btnSair;
     private VeiculoDaoJDBC veiculoDao;
     private List<Veiculo> listaVeiculos;
@@ -37,7 +39,7 @@ public class TelaVendedor extends Application {
         panelForm.setHgap(10);
         panelForm.setVgap(10);
         panelForm.setPadding(new Insets(20));
-        panelForm.setStyle("-fx-background-color: #2c3e50; -fx-background-radius: 10;"); // Fundo escuro com bordas arredondadas
+        panelForm.setStyle("-fx-background-color: #042640; -fx-background-radius: 10;"); // Fundo escuro com bordas arredondadas
 
         // ComboBox para selecionar o veículo
         Label lblSelecionar = new Label("Selecionar Veículo:");
@@ -59,6 +61,10 @@ public class TelaVendedor extends Application {
         lblCor.setStyle("-fx-text-fill: white;");
         txtCor = new TextField();
 
+        Label lblPreco = new Label("Preço:");
+        lblPreco.setStyle("-fx-text-fill: white;");
+        txtPreco = new TextField();
+
         panelForm.add(lblSelecionar, 0, 0);
         panelForm.add(comboVeiculos, 1, 0);
         panelForm.add(lblModelo, 0, 1);
@@ -67,28 +73,33 @@ public class TelaVendedor extends Application {
         panelForm.add(txtAno, 1, 2);
         panelForm.add(lblCor, 0, 3);
         panelForm.add(txtCor, 1, 3);
+        panelForm.add(lblPreco, 0, 4);
+        panelForm.add(txtPreco, 1, 4);
 
         // Painel de botões
         HBox panelButtons = new HBox(10);
-        panelButtons.setPadding(new Insets(20, 0, 0, 0));
-        panelButtons.setStyle("-fx-background-color: black; -fx-background-radius: 10;"); // Fundo escuro e bordas arredondadas
+        panelButtons.setPadding(new Insets(20, 10, 0, 0));
+        panelButtons.setStyle(" -fx-background-radius: 10;"); // Fundo escuro e bordas arredondadas
         panelButtons.setSpacing(10);
 
         // Botão Adicionar Veículo
         btnAdicionar = new Button("Adicionar Veículo");
-        btnAdicionar.setStyle("-fx-background-color: black; -fx-text-fill: yellow;");
+        btnAdicionar.setStyle("-fx-background-color: black; -fx-text-fill: yellow; -fx-background-radius: 10;");
+        btnAdicionar.setOnAction(e -> adicionarVeiculo()); // Corrigido aqui
 
         // Botão Editar Veículo
         btnEditar = new Button("Editar Veículo");
-        btnEditar.setStyle("-fx-background-color: black; -fx-text-fill: orange;");
+        btnEditar.setStyle("-fx-background-color: black; -fx-text-fill: orange; -fx-background-radius: 10; ");
+        btnEditar.setOnAction(e -> editarVeiculo()); // Corrigido aqui
 
         // Botão Deletar Veículo
         btnDeletar = new Button("Deletar Veículo");
-        btnDeletar.setStyle("-fx-background-color: black; -fx-text-fill: red;");
+        btnDeletar.setStyle("-fx-background-color: black; -fx-text-fill: red; -fx-background-radius: 10; ");
+        btnDeletar.setOnAction(e -> deletarVeiculo()); // Corrigido aqui
 
         // Botão Sair
         btnSair = new Button("Sair");
-        btnSair.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        btnSair.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 10; ");
         btnSair.setOnAction(e -> {
             new TelaLogin().start(new Stage());
             primaryStage.close();
@@ -120,6 +131,7 @@ public class TelaVendedor extends Application {
             txtModelo.setText(veiculoSelecionado.getModelo());
             txtAno.setText(String.valueOf(veiculoSelecionado.getAno()));
             txtCor.setText(veiculoSelecionado.getCor());
+            txtPreco.setText(String.valueOf(veiculoSelecionado.getPreco()));
         }
     }
 
@@ -129,9 +141,10 @@ public class TelaVendedor extends Application {
             int ano = Integer.parseInt(txtAno.getText());
             String modelo = txtModelo.getText();
             String cor = txtCor.getText();
+            double preco = Double.parseDouble(txtPreco.getText());
 
-            Veiculo veiculo = new Veiculo(ano, modelo, cor);
-            veiculoDao.adicionarVeiculo(veiculo);
+            Veiculo veiculo = new Veiculo(ano, modelo, cor, preco);
+            veiculoDao.adicionarVeiculo(veiculo); // Adiciona o veículo ao banco de dados
 
             showAlert("Sucesso", "Veículo adicionado com sucesso!", Alert.AlertType.INFORMATION);
             listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Atualiza a lista
@@ -176,7 +189,7 @@ public class TelaVendedor extends Application {
         if (index >= 0) {
             String modelo = listaVeiculos.get(index).getModelo();
 
-            veiculoDao.deletarVeiculoPelaCor(modelo);
+            veiculoDao.deletarVeiculoPelaCor(modelo); // Deleta o veículo no banco de dados
             showAlert("Sucesso", "Veículo deletado com sucesso!", Alert.AlertType.INFORMATION);
             listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Atualiza a lista
             carregarVeiculosNoComboBox(); // Atualiza o combo box
