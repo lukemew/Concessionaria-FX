@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="060dfafc-bc6b-413b-bba8-aa5fcb31f8ae" name="Changes" comment="Adicionando os atributos preço e id que até então faltava à interface">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="060dfafc-bc6b-413b-bba8-aa5fcb31f8ae" name="Changes" comment="- Adicionado botão de comprar como opção para o cliente&#10;&#10;- Adicionado valor do veículo às telas do vendedor e do cliente&#10;&#10;- Tornando as imagens mais dinâmicas para a tela do Cliente&#10;&#10;- Algumas melhorias de design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/bmw_serie3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/bmw_série_3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/honda_civic2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/honda_civic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/toyotacorolla.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/toyota_corolla.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Veiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Veiculo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/entities/Carro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/entities/Carro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/dao/impl/VeiculoDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/dao/impl/VeiculoDaoJDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/program/TelaCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/program/TelaCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/program/TelaVendedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/program/TelaVendedor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/imagens/screenshots/TelaDeLogin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/imagens/screenshots/TelaDeLogin.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +96,7 @@
       <updated>1728745381257</updated>
       <workItem from="1728745382282" duration="7989000" />
       <workItem from="1728832508584" duration="6911000" />
+      <workItem from="1728848610118" duration="1141000" />
     </task>
     <task id="LOCAL-00001" summary="Alterações na interface JavaFX">
       <option name="closed" value="true" />
@@ -123,7 +114,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728836519208</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adicionando o atributo preco à classe veículo">
+      <option name="closed" value="true" />
+      <created>1728848720622</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728848720622</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- Adicionado botão de comprar como opção para o cliente&#10;&#10;- Adicionado valor do veículo às telas do vendedor e do cliente&#10;&#10;- Tornando as imagens mais dinâmicas para a tela do Cliente&#10;&#10;- Algumas melhorias de design">
+      <option name="closed" value="true" />
+      <created>1728848871107</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728848871107</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +150,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Alterações na interface JavaFX" />
     <MESSAGE value="Adicionando os atributos preço e id que até então faltava à interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando os atributos preço e id que até então faltava à interface" />
+    <MESSAGE value="Adicionando o atributo preco à classe veículo" />
+    <MESSAGE value="- Adicionado botão de comprar como opção para o cliente&#10;&#10;- Adicionado valor do veículo às telas do vendedor e do cliente&#10;&#10;- Tornando as imagens mais dinâmicas para a tela do Cliente&#10;&#10;- Algumas melhorias de design" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Adicionado botão de comprar como opção para o cliente&#10;&#10;- Adicionado valor do veículo às telas do vendedor e do cliente&#10;&#10;- Tornando as imagens mais dinâmicas para a tela do Cliente&#10;&#10;- Algumas melhorias de design" />
   </component>
 </project>
