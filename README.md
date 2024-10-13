@@ -27,15 +27,15 @@ Este projeto é uma aplicação de gerenciamento de concessionária de veículos
 ## Screenshots
 *Aqui o usuário seleciona se ele é um vendedor ou cliente, e loga no sistema.*
 
-![Tela de Login](src/imagens/screenshots/TelaDeLogin.png)
+![Tela de Login](src/main/java/imagens/screenshots/TelaDeLogin.png)
 
 *Aqui o cliente tem a opção de sair (deslogar da conta) ou escolher algum dos carros disponíveis para que possa fazer um test drive ou até mesmo adquirí-los.*
 
-![Tela do Cliente](src/imagens/screenshots/TelaDoCLiente.png)
+![Tela do Cliente](src/main/java/imagens/screenshots/TelaDoCLiente.png)
 
 *Aqui o vendedor poderá editar informações que o cliente vê, como deletar o carro, ou editar o modelo, ano e cor do carro. Editando também o banco de dados do projeto.*
 
-![Tela do Vendedor](src/imagens/screenshots/TelaDoVendedor.png)
+![Tela do Vendedor](src/main/java/imagens/screenshots/TelaDoVendedor.png)
 
 ## Finalidade do Projeto
 Este projeto foi desenvolvido como segunda parte do projeto final da disciplina de Programação Orientada a Objetos (POO) do IFCE Campus Boa Viagem. O objetivo principal é aplicar conceitos fundamentais da POO, incluindo herança, encapsulamento e polimorfismo, bem como implementar técnicas de persistência de dados utilizando JDBC e interface gráfica com JavaFX.
