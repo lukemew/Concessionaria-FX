@@ -1,138 +1,121 @@
 package program;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import model.dao.impl.VeiculoDaoJDBC;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import model.Veiculo;
+import model.dao.impl.VeiculoDaoJDBC;
 import db.DB;
 
-public class TelaCliente extends JFrame {
+import java.util.List;
 
-    private JPanel panel;
-    private JButton[] btnTestDrive;
-    private JLabel[] lblCarro;
-    private JLabel[] lblImagem;
-    private JButton btnSair;
+public class TelaCliente extends Application {
+
     private VeiculoDaoJDBC veiculoDao;
     private List<Veiculo> listaVeiculos;
 
-    public TelaCliente() {
-        // Conexão com o banco de dados
-        veiculoDao = new VeiculoDaoJDBC(DB.getConnection()); // Instancia o VeiculoDaoJDBC
-        listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Busca os veículos do banco
+    @Override
+    public void start(Stage primaryStage) {
+        // Configurando conexão com o banco e buscando veículos
+        veiculoDao = new VeiculoDaoJDBC(DB.getConnection());
+        listaVeiculos = veiculoDao.buscarTodosVeiculos();
 
-        setTitle("Área do Cliente - Concessionária TOPcar");
-        setSize(800, 600); // Tamanho da tela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        primaryStage.setTitle("Área do Cliente - Concessionária TOPcar");
 
-        panel = new JPanel(new GridLayout(6, 3, 10, 10)); // Layout de grade para 6 carros (3 colunas)
-        panel.setBackground(new Color(30, 30, 30)); // Fundo escuro
+        // Layout principal com fundo escuro
+        VBox layoutPrincipal = new VBox(20);
+        layoutPrincipal.setAlignment(Pos.TOP_CENTER);
+        layoutPrincipal.setPadding(new Insets(20));
+        layoutPrincipal.setStyle("-fx-background-color: #1e1e1e;"); // Fundo totalmente escuro
 
-        // Definindo os caminhos das imagens
+        // Título "Concessionária TOPcar"
+        Label lblCabecalho = new Label("Concessionária TOPcar");
+        lblCabecalho.setStyle("-fx-font-size: 30px; -fx-text-fill: yellow; -fx-font-weight: bold;");
+        lblCabecalho.setAlignment(Pos.CENTER);
+
+        // Grid para exibição dos veículos
+        GridPane gridVeiculos = new GridPane();
+        gridVeiculos.setHgap(20);
+        gridVeiculos.setVgap(20);
+        gridVeiculos.setAlignment(Pos.CENTER);
+
+        // Caminhos das imagens (ajuste conforme necessário)
         String[] imagens = {
-                "src/imagens/bmw_serie3.png",     // Caminho da imagem do BMW X1
-                "src/imagens/chevrolet_camaro.png",    // Caminho da imagem do Audi A3
-                "src/imagens/ford_mustang.png", // Caminho da imagem do Ford Mustang
-                "src/imagens/toyotacorolla.png",// Caminho da imagem do Toyota Corolla
-                "src/imagens/mercedes-benz_classe_c.png",// Caminho da imagem do Mercedes GLA
-                "src/imagens/honda_civic2.png"// Caminho da imagem do Honda Civic
+                "src/main/java/imagens/bmw_serie3.png",
+                "src/main/java/imagens/chevrolet_camaro.png",
+                "src/main/java/imagens/ford_mustang.png",
+                "src/main/java/imagens/toyotacorolla.png",
+                "src/main/java/imagens/mercedes-benz_classe_c.png",
+                "src/main/java/imagens/honda_civic2.png"
         };
 
-        btnTestDrive = new JButton[listaVeiculos.size()];
-        lblCarro = new JLabel[listaVeiculos.size()];
-        lblImagem = new JLabel[6];  // Tamanho fixo para 6 carros
-
-        Font fonteTexto = new Font("SansSerif", Font.PLAIN, 16);
-
-        // Preenche o painel com os carros vindos do banco de dados
+        // Preenchendo o grid com os veículos
         for (int i = 0; i < listaVeiculos.size(); i++) {
-            Veiculo veiculo = listaVeiculos.get(i); // Pega o veículo atual da lista
+            Veiculo veiculo = listaVeiculos.get(i);
 
-            // Adicionando a imagem estática com base no índice (na coluna esquerda)
-            lblImagem[i] = new JLabel();
-            lblImagem[i].setIcon(redimensionarImagem(imagens[i], 150, 100)); // Redimensionando para 150x100 pixels
-            lblImagem[i].setHorizontalAlignment(SwingConstants.CENTER);
-            panel.add(lblImagem[i]);
+            // Imagem do veículo
+            ImageView imgView = new ImageView(new Image("file:" + imagens[i]));
+            imgView.setFitWidth(150);
+            imgView.setFitHeight(100);
 
-            // Adicionando os detalhes do carro (centralizado na coluna do meio)
-            lblCarro[i] = new JLabel("<html>Modelo: " + veiculo.getModelo() + "<br>Cor: " + veiculo.getCor() + "</html>");
-            lblCarro[i].setForeground(Color.WHITE);
-            lblCarro[i].setFont(fonteTexto);
-            lblCarro[i].setHorizontalAlignment(SwingConstants.CENTER); // Centralizado
-            panel.add(lblCarro[i]);
+            // Detalhes do carro
+            Label lblCarro = new Label(veiculo.getModelo() + "\nCor: " + veiculo.getCor() + "\nAno: " + veiculo.getAno());
+            lblCarro.setStyle("-fx-font-size: 14px; -fx-text-fill: white;");
 
-            // Botão para agendar test drive (na coluna da direita)
-            btnTestDrive[i] = new JButton("Agendar Test Drive");
-            btnTestDrive[i].setBackground(Color.BLACK);
-            btnTestDrive[i].setForeground(Color.white);
-            btnTestDrive[i].setFont(fonteTexto);
-            btnTestDrive[i].setFocusPainted(false);
-            btnTestDrive[i].setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
-            btnTestDrive[i].addActionListener(new AgendarTestDriveListener(i)); // Ação ao clicar no botão
-            panel.add(btnTestDrive[i]);
+            // Botão de agendamento de test drive
+            Button btnTestDrive = new Button("Test Drive");
+            btnTestDrive.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;");
+            btnTestDrive.setOnAction(e -> agendarTestDrive(veiculo));
+
+            // Adicionando ao grid
+            VBox veiculoBox = new VBox(10, imgView, lblCarro, btnTestDrive);
+            veiculoBox.setAlignment(Pos.CENTER);
+            veiculoBox.setStyle("-fx-background-color: #2c3e50; -fx-padding: 10; -fx-background-radius: 10;"); // Fundo escuro para cada veículo
+
+            gridVeiculos.add(veiculoBox, i % 3, i / 3); // Coloca 3 veículos por linha
         }
 
-        // Adicionando botão de sair no topo
-        btnSair = new JButton("Sair");
-        btnSair.setBackground(Color.BLACK);
-        btnSair.setForeground(Color.YELLOW);
-        btnSair.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnSair.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
-        btnSair.setFocusPainted(false);
-        btnSair.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Volta para a tela de login
-                new TelaLogin().setVisible(true);
-                dispose();
+        // ScrollPane para permitir rolagem se necessário
+        ScrollPane scrollPane = new ScrollPane(gridVeiculos);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background: transparent;");
+
+        // Botão sair
+        Button btnSair = new Button("Sair");
+        btnSair.setStyle("-fx-background-color: black; -fx-text-fill: yellow;");
+        btnSair.setOnAction(e -> primaryStage.close());
+
+        // Layout final com espaçamento e fundo escuro
+        VBox layoutFinal = new VBox(20, lblCabecalho, scrollPane, btnSair);
+        layoutFinal.setAlignment(Pos.TOP_CENTER);
+        layoutFinal.setPadding(new Insets(20));
+        layoutFinal.setStyle("-fx-background-color: #1e1e1e;"); // Garantindo fundo escuro em toda a tela
+
+        Scene scene = new Scene(layoutFinal, 800, 600);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void agendarTestDrive(Veiculo veiculo) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Agendar Test Drive");
+        alert.setHeaderText(null);
+        alert.setContentText("Deseja agendar um test drive para o " + veiculo.getModelo() + "?");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                new Alert(Alert.AlertType.INFORMATION, "Test Drive agendado com sucesso!").showAndWait();
             }
         });
-
-        // Painel principal com BorderLayout
-        JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.setBackground(new Color(30, 30, 30));
-
-        // Painel para o botão de sair no canto superior direito
-        JPanel painelSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        painelSuperior.setBackground(new Color(30, 30, 30));
-        painelSuperior.add(btnSair);
-
-        painelPrincipal.add(painelSuperior, BorderLayout.NORTH);
-        painelPrincipal.add(new JScrollPane(panel), BorderLayout.CENTER);
-
-        add(painelPrincipal);
-    }
-
-    // Função para redimensionar a imagem
-    private ImageIcon redimensionarImagem(String caminhoImagem, int largura, int altura) {
-        ImageIcon icone = new ImageIcon(caminhoImagem);
-        Image imagem = icone.getImage();
-        Image imagemRedimensionada = imagem.getScaledInstance(largura, altura, Image.SCALE_SMOOTH); // Redimensiona a imagem
-        return new ImageIcon(imagemRedimensionada);
-    }
-
-    // Classe interna para lidar com o evento de agendar test drive
-    private class AgendarTestDriveListener implements ActionListener {
-        private int index;
-
-        public AgendarTestDriveListener(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realizar um test drive com o " + listaVeiculos.get(index).getModelo() + "?", "Confirmar Test Drive", JOptionPane.YES_NO_OPTION);
-            if (resposta == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Test Drive realizado com sucesso!");
-            }
-        }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaCliente().setVisible(true));
+        launch(args);
     }
 }

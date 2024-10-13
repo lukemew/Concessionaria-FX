@@ -1,138 +1,119 @@
 package program;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.paint.Color;
 
-public class TelaLogin extends JFrame {
+public class TelaLogin extends Application {
 
-    private JTextField txtUsuario;
-    private JPasswordField txtSenha;
-    private JRadioButton radioCliente;
-    private JRadioButton radioVendedor;
-    private JButton btnLogin;
+    private TextField txtUsuario;
+    private PasswordField txtSenha;
+    private RadioButton radioCliente;
+    private RadioButton radioVendedor;
 
-    public TelaLogin() {
-        setTitle("Login - Concessionária TOPcar");
-        setSize(500, 350); // Ajuste do tamanho da tela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Login - Concessionária TOPcar");
 
-        // Fonte sem serifa e configuração de estilo geral
-        Font fonteSemSerifa = new Font("SansSerif", Font.PLAIN, 16);
-        Font fonteCabecalho = new Font("SansSerif", Font.BOLD, 22);
+        // Layout principal com imagem de fundo borrada e escurecida
+        VBox layoutPrincipal = new VBox(20);
+        layoutPrincipal.setAlignment(Pos.CENTER);
+        layoutPrincipal.setPadding(new Insets(20));
 
-        // Configurando o layout e estilo dos painéis
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(new Color(30, 30, 30)); // Fundo escuro
+        // Adicionar a imagem de fundo
+        ImageView backgroundImageView = new ImageView(new Image("file:src/main/java/imagens/eldorado.png")); // Substitua com o caminho da sua imagem
+        backgroundImageView.setFitWidth(800); // Largura da cena
+        backgroundImageView.setFitHeight(600); // Altura da cena
+        backgroundImageView.setEffect(new GaussianBlur(15)); // Efeito de desfoque na imagem
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaçamento entre os componentes
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        // Adicionar uma camada escura sobre a imagem
+        StackPane backgroundPane = new StackPane(backgroundImageView);
+        backgroundPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9);");
 
-        // Adicionando o cabeçalho
-        JLabel lblCabecalho = new JLabel("Concessionária TOPcar", JLabel.CENTER);
-        lblCabecalho.setForeground(new Color(255, 215, 0)); // Amarelo para o texto
-        lblCabecalho.setBackground(Color.BLACK); // Fundo preto
-        lblCabecalho.setOpaque(true);
-        lblCabecalho.setFont(fonteCabecalho);
-        lblCabecalho.setHorizontalAlignment(JLabel.CENTER);
+        // Título
+        Label lblCabecalho = new Label("Concessionária TOPcar");
+        lblCabecalho.setStyle("-fx-padding: 10; -fx-background-color: rgba(0, 0, 0, 0.5); -fx-background-radius: 10px; -fx-font-size: 30px; -fx-text-fill: yellow; -fx-font-weight: bold;");
+        lblCabecalho.setAlignment(Pos.CENTER);
 
-        gbc.gridwidth = 2;
-        gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(lblCabecalho, gbc);
-        gbc.gridwidth = 1; // Resetando após o cabeçalho
 
-        // Criando os componentes com cores e fontes ajustadas
-        JLabel lblUsuario = new JLabel("Usuário:");
-        lblUsuario.setForeground(Color.WHITE);
-        lblUsuario.setFont(fonteSemSerifa);
+        // Layout para os campos de login
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(15);
+        gridPane.setHgap(15);
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setPadding(new Insets(20));
+        gridPane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 10px;");
 
-        txtUsuario = new JTextField();
-        txtUsuario.setBackground(new Color(50, 50, 50)); // Fundo do campo de texto
-        txtUsuario.setForeground(Color.WHITE);
-        txtUsuario.setFont(fonteSemSerifa);
-        txtUsuario.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100)));
+        // Campos de usuário e senha
+        Label lblUsuario = new Label("Usuário:");
+        lblUsuario.setStyle("-fx-text-fill: white; -fx-font-size: 16px;");
+        txtUsuario = new TextField();
+        txtUsuario.setStyle("-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-prompt-text-fill: #95a5a6;");
 
-        JLabel lblSenha = new JLabel("Senha:");
-        lblSenha.setForeground(Color.WHITE);
-        lblSenha.setFont(fonteSemSerifa);
+        Label lblSenha = new Label("Senha:");
+        lblSenha.setStyle("-fx-text-fill: white; -fx-font-size: 16px;");
+        txtSenha = new PasswordField();
+        txtSenha.setStyle("-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-prompt-text-fill: #95a5a6;");
 
-        txtSenha = new JPasswordField();
-        txtSenha.setBackground(new Color(50, 50, 50)); // Fundo da senha
-        txtSenha.setForeground(Color.WHITE);
-        txtSenha.setFont(fonteSemSerifa);
-        txtSenha.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100)));
+        // Opções de login
+        radioCliente = new RadioButton("Cliente");
+        radioCliente.setStyle("-fx-text-fill: white;");
+        radioVendedor = new RadioButton("Vendedor");
+        radioVendedor.setStyle("-fx-text-fill: white;");
 
-        radioCliente = new JRadioButton("Cliente");
-        radioCliente.setBackground(new Color(30, 30, 30)); // Fundo para combinar
-        radioCliente.setForeground(Color.WHITE);
-        radioCliente.setFont(fonteSemSerifa);
+        ToggleGroup group = new ToggleGroup();
+        radioCliente.setToggleGroup(group);
+        radioVendedor.setToggleGroup(group);
 
-        radioVendedor = new JRadioButton("Vendedor");
-        radioVendedor.setBackground(new Color(30, 30, 30)); // Fundo para combinar
-        radioVendedor.setForeground(Color.WHITE);
-        radioVendedor.setFont(fonteSemSerifa);
+        // Botão de login
+        Button btnLogin = new Button("Login");
+        btnLogin.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;");
+        btnLogin.setOnAction(e -> realizarLogin(primaryStage));
 
-        btnLogin = new JButton("Login");
-        btnLogin.setBackground(new Color(70, 130, 180)); // Cor do botão
-        btnLogin.setForeground(Color.WHITE);
-        btnLogin.setFont(fonteSemSerifa);
-        btnLogin.setFocusPainted(false);
+        // Adicionando ao grid
+        gridPane.add(lblUsuario, 0, 0);
+        gridPane.add(txtUsuario, 1, 0);
+        gridPane.add(lblSenha, 0, 1);
+        gridPane.add(txtSenha, 1, 1);
+        gridPane.add(radioCliente, 0, 2);
+        gridPane.add(radioVendedor, 1, 2);
+        gridPane.add(btnLogin, 1, 3);
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(radioCliente);
-        group.add(radioVendedor);
+        layoutPrincipal.getChildren().addAll(lblCabecalho, gridPane);
 
-        // Adicionando componentes ao painel
-        gbc.gridx = 0; gbc.gridy = 1;
-        panel.add(lblUsuario, gbc);
+        // Empilhar o layout principal e a imagem de fundo
+        StackPane root = new StackPane(backgroundPane, layoutPrincipal);
+        Scene scene = new Scene(root, 800, 600); // Tamanho maior da janela
 
-        gbc.gridx = 1;
-        panel.add(txtUsuario, gbc);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
-        gbc.gridx = 0; gbc.gridy = 2;
-        panel.add(lblSenha, gbc);
+    private void realizarLogin(Stage primaryStage) {
+        String usuario = txtUsuario.getText();
+        String senha = txtSenha.getText();
 
-        gbc.gridx = 1;
-        panel.add(txtSenha, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 3;
-        panel.add(radioCliente, gbc);
-
-        gbc.gridx = 1;
-        panel.add(radioVendedor, gbc);
-
-        gbc.gridx = 1; gbc.gridy = 4;
-        panel.add(btnLogin, gbc);
-
-        add(panel);
-
-        // Ação do botão de login com verificação de credenciais
-        btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String usuario = txtUsuario.getText();
-                String senha = new String(txtSenha.getPassword());
-
-                if (usuario.equals("user") && senha.equals("12345")) {
-                    if (radioCliente.isSelected()) {
-                        // Redirecionando para a tela de cliente
-                        new TelaCliente().setVisible(true);
-                    } else if (radioVendedor.isSelected()) {
-                        // Redirecionando para a tela de vendedor
-                        new TelaVendedor().setVisible(true);
-                    }
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
-                }
+        if (usuario.equals("user") && senha.equals("12345")) {
+            if (radioCliente.isSelected()) {
+                new TelaCliente().start(primaryStage);
+            } else if (radioVendedor.isSelected()) {
+                new TelaVendedor().start(primaryStage);
             }
-        });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Usuário ou senha incorretos.");
+            alert.showAndWait();
+        }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new TelaLogin().setVisible(true));
+        launch(args);
     }
 }

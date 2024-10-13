@@ -1,52 +1,126 @@
 package program;
 
 import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import model.Veiculo;
 import model.dao.impl.VeiculoDaoJDBC;
 import db.DB;
 
-public class TelaVendedorFX extends Application {
+import java.util.List;
 
+public class TelaVendedor extends Application {
+
+    private ComboBox<String> comboVeiculos;
     private TextField txtModelo, txtAno, txtCor;
+    private Button btnAdicionar, btnEditar, btnDeletar, btnSair;
     private VeiculoDaoJDBC veiculoDao;
+    private List<Veiculo> listaVeiculos;
 
     @Override
     public void start(Stage primaryStage) {
         veiculoDao = new VeiculoDaoJDBC(DB.getConnection());
+        listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Buscar os veículos do banco
 
-        // Criação dos componentes
+        primaryStage.setTitle("Área do Vendedor - Concessionária TOPcar");
+
+        // Layout principal
+        BorderPane root = new BorderPane();
+        root.setPadding(new Insets(20));
+        root.setStyle("-fx-background-color: #1e1e1e;"); // Fundo escuro principal
+
+        // Painel de formulário
+        GridPane panelForm = new GridPane();
+        panelForm.setHgap(10);
+        panelForm.setVgap(10);
+        panelForm.setPadding(new Insets(20));
+        panelForm.setStyle("-fx-background-color: #2c3e50; -fx-background-radius: 10;"); // Fundo escuro com bordas arredondadas
+
+        // ComboBox para selecionar o veículo
+        Label lblSelecionar = new Label("Selecionar Veículo:");
+        lblSelecionar.setStyle("-fx-text-fill: white;");
+        comboVeiculos = new ComboBox<>();
+        carregarVeiculosNoComboBox(); // Carrega os veículos na combo box
+        comboVeiculos.setOnAction(e -> carregarDadosVeiculoSelecionado());
+
+        // Componentes do Formulário
         Label lblModelo = new Label("Modelo:");
+        lblModelo.setStyle("-fx-text-fill: white;");
         txtModelo = new TextField();
 
         Label lblAno = new Label("Ano:");
+        lblAno.setStyle("-fx-text-fill: white;");
         txtAno = new TextField();
 
         Label lblCor = new Label("Cor:");
+        lblCor.setStyle("-fx-text-fill: white;");
         txtCor = new TextField();
 
-        Button btnAdicionar = new Button("Adicionar Veículo");
-        btnAdicionar.setOnAction(e -> adicionarVeiculo());
+        panelForm.add(lblSelecionar, 0, 0);
+        panelForm.add(comboVeiculos, 1, 0);
+        panelForm.add(lblModelo, 0, 1);
+        panelForm.add(txtModelo, 1, 1);
+        panelForm.add(lblAno, 0, 2);
+        panelForm.add(txtAno, 1, 2);
+        panelForm.add(lblCor, 0, 3);
+        panelForm.add(txtCor, 1, 3);
 
-        // Layout
-        GridPane grid = new GridPane();
-        grid.add(lblModelo, 0, 0);
-        grid.add(txtModelo, 1, 0);
-        grid.add(lblAno, 0, 1);
-        grid.add(txtAno, 1, 1);
-        grid.add(lblCor, 0, 2);
-        grid.add(txtCor, 1, 2);
-        grid.add(btnAdicionar, 1, 3);
+        // Painel de botões
+        HBox panelButtons = new HBox(10);
+        panelButtons.setPadding(new Insets(20, 0, 0, 0));
+        panelButtons.setStyle("-fx-background-color: black; -fx-background-radius: 10;"); // Fundo escuro e bordas arredondadas
+        panelButtons.setSpacing(10);
 
-        Scene scene = new Scene(grid, 400, 200);
-        primaryStage.setTitle("Área do Vendedor - JavaFX");
+        // Botão Adicionar Veículo
+        btnAdicionar = new Button("Adicionar Veículo");
+        btnAdicionar.setStyle("-fx-background-color: black; -fx-text-fill: yellow;");
+
+        // Botão Editar Veículo
+        btnEditar = new Button("Editar Veículo");
+        btnEditar.setStyle("-fx-background-color: black; -fx-text-fill: orange;");
+
+        // Botão Deletar Veículo
+        btnDeletar = new Button("Deletar Veículo");
+        btnDeletar.setStyle("-fx-background-color: black; -fx-text-fill: red;");
+
+        // Botão Sair
+        btnSair = new Button("Sair");
+        btnSair.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+        btnSair.setOnAction(e -> {
+            new TelaLogin().start(new Stage());
+            primaryStage.close();
+        });
+
+        panelButtons.getChildren().addAll(btnAdicionar, btnEditar, btnDeletar, btnSair);
+
+        root.setCenter(panelForm);
+        root.setBottom(panelButtons);
+
+        Scene scene = new Scene(root, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    // Método para carregar veículos no ComboBox
+    private void carregarVeiculosNoComboBox() {
+        comboVeiculos.getItems().clear(); // Limpa a combo box
+        for (Veiculo veiculo : listaVeiculos) {
+            comboVeiculos.getItems().add(veiculo.getModelo()); // Adiciona o modelo do veículo na combo box
+        }
+    }
+
+    // Método para carregar os dados do veículo selecionado
+    private void carregarDadosVeiculoSelecionado() {
+        int index = comboVeiculos.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            Veiculo veiculoSelecionado = listaVeiculos.get(index);
+            txtModelo.setText(veiculoSelecionado.getModelo());
+            txtAno.setText(String.valueOf(veiculoSelecionado.getAno()));
+            txtCor.setText(veiculoSelecionado.getCor());
+        }
     }
 
     // Método para adicionar veículo
@@ -59,12 +133,64 @@ public class TelaVendedorFX extends Application {
             Veiculo veiculo = new Veiculo(ano, modelo, cor);
             veiculoDao.adicionarVeiculo(veiculo);
 
-            System.out.println("Veículo adicionado com sucesso!");
+            showAlert("Sucesso", "Veículo adicionado com sucesso!", Alert.AlertType.INFORMATION);
+            listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Atualiza a lista
+            carregarVeiculosNoComboBox(); // Atualiza o combo box
         } catch (NumberFormatException e) {
-            System.out.println("Por favor, insira um ano válido.");
+            showAlert("Erro", "Por favor, insira um ano válido.", Alert.AlertType.ERROR);
         } catch (Exception e) {
-            System.out.println("Erro ao adicionar veículo: " + e.getMessage());
+            showAlert("Erro", "Erro ao adicionar veículo: " + e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    // Método para editar veículo
+    private void editarVeiculo() {
+        int index = comboVeiculos.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            try {
+                int ano = Integer.parseInt(txtAno.getText());
+                String modelo = txtModelo.getText();
+                String cor = txtCor.getText();
+
+                Veiculo veiculo = listaVeiculos.get(index);
+                veiculo.setAno(ano);
+                veiculo.setModelo(modelo);
+                veiculo.setCor(cor);
+
+                veiculoDao.atualizarVeiculo(veiculo); // Atualiza o veículo no banco de dados
+
+                showAlert("Sucesso", "Veículo atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Atualiza a lista
+                carregarVeiculosNoComboBox(); // Atualiza o combo box
+            } catch (NumberFormatException e) {
+                showAlert("Erro", "Por favor, insira um ano válido.", Alert.AlertType.ERROR);
+            } catch (Exception e) {
+                showAlert("Erro", "Erro ao editar veículo: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    // Método para deletar veículo
+    private void deletarVeiculo() {
+        int index = comboVeiculos.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            String modelo = listaVeiculos.get(index).getModelo();
+
+            veiculoDao.deletarVeiculoPelaCor(modelo);
+            showAlert("Sucesso", "Veículo deletado com sucesso!", Alert.AlertType.INFORMATION);
+            listaVeiculos = veiculoDao.buscarTodosVeiculos(); // Atualiza a lista
+            carregarVeiculosNoComboBox(); // Atualiza o combo box
+        } else {
+            showAlert("Erro", "Por favor, selecione o modelo do veículo a ser deletado.", Alert.AlertType.ERROR);
+        }
+    }
+
+    // Método para exibir mensagens
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {
