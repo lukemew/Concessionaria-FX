@@ -82,9 +82,11 @@ public class VeiculoDaoJDBC implements VeiculoDao {
 
             while (rs.next()) {
                 Veiculo veiculo = new Veiculo();
+                veiculo.setId(rs.getInt("id"));
                 veiculo.setModelo(rs.getString("modelo"));
                 veiculo.setAno(rs.getInt("ano"));
                 veiculo.setCor(rs.getString("cor"));
+                veiculo.setPreco(rs.getDouble("preco"));
                 list.add(veiculo);
             }
             return list;

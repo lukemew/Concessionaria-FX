@@ -1,21 +1,40 @@
 package model;
 
 public class Veiculo {
+    private int id;
     private int ano;
     private String modelo;
     private String cor;
-  // Novo atributo para preço
+    private double preco;
+
 
     public Veiculo() {}
 
-    public Veiculo(int ano, String modelo, String cor) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Veiculo(int id, int ano, String modelo, String cor, double preco) {
+        this.id = id;
         this.ano = ano;
         this.modelo = modelo;
         this.cor = cor;
+        this.preco = preco;
 
     }
 
-    // Getters e Setters
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
     public int getAno() {
         return ano;
     }
