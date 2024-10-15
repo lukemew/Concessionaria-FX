@@ -8,5 +8,5 @@ module com.example.concessionariafx {
     requires javafx.graphics;
 
     opens program to javafx.graphics;
-    exports program; // Exporte o pacote onde suas telas estão
+    exports program; 
 }
