@@ -23,28 +23,28 @@ public class TelaLogin extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Login - Concessionária TOPcar");
 
-        // Layout principal com imagem de fundo borrada e escurecida
+        
         VBox layoutPrincipal = new VBox(20);
         layoutPrincipal.setAlignment(Pos.CENTER);
         layoutPrincipal.setPadding(new Insets(20));
 
-        // Adicionar a imagem de fundo
-        ImageView backgroundImageView = new ImageView(new Image("file:src/main/java/imagens/eldorado.png")); // Substitua com o caminho da sua imagem
-        backgroundImageView.setFitWidth(800); // Largura da cena
-        backgroundImageView.setFitHeight(600); // Altura da cena
-        backgroundImageView.setEffect(new GaussianBlur(15)); // Efeito de desfoque na imagem
+        
+        ImageView backgroundImageView = new ImageView(new Image("file:src/main/java/imagens/eldorado.png")); 
+        backgroundImageView.setFitWidth(800); 
+        backgroundImageView.setFitHeight(600); 
+        backgroundImageView.setEffect(new GaussianBlur(15)); 
 
-        // Adicionar uma camada escura sobre a imagem
+       
         StackPane backgroundPane = new StackPane(backgroundImageView);
         backgroundPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9);");
 
-        // Título
+        
         Label lblCabecalho = new Label("Concessionária TOPcar");
         lblCabecalho.setStyle("-fx-padding: 10; -fx-background-color: rgba(0, 0, 0, 0.5); -fx-background-radius: 10px; -fx-font-size: 30px; -fx-text-fill: yellow; -fx-font-weight: bold;");
         lblCabecalho.setAlignment(Pos.CENTER);
 
 
-        // Layout para os campos de login
+        
         GridPane gridPane = new GridPane();
         gridPane.setVgap(15);
         gridPane.setHgap(15);
@@ -52,7 +52,7 @@ public class TelaLogin extends Application {
         gridPane.setPadding(new Insets(20));
         gridPane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 10px;");
 
-        // Campos de usuário e senha
+        
         Label lblUsuario = new Label("Usuário:");
         lblUsuario.setStyle("-fx-text-fill: white; -fx-font-size: 16px;");
         txtUsuario = new TextField();
@@ -63,7 +63,7 @@ public class TelaLogin extends Application {
         txtSenha = new PasswordField();
         txtSenha.setStyle("-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-prompt-text-fill: #95a5a6;");
 
-        // Opções de login
+        
         radioCliente = new RadioButton("Cliente");
         radioCliente.setStyle("-fx-text-fill: white;");
         radioVendedor = new RadioButton("Vendedor");
@@ -73,12 +73,12 @@ public class TelaLogin extends Application {
         radioCliente.setToggleGroup(group);
         radioVendedor.setToggleGroup(group);
 
-        // Botão de login
+        
         Button btnLogin = new Button("Login");
         btnLogin.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;");
         btnLogin.setOnAction(e -> realizarLogin(primaryStage));
 
-        // Adicionando ao grid
+        
         gridPane.add(lblUsuario, 0, 0);
         gridPane.add(txtUsuario, 1, 0);
         gridPane.add(lblSenha, 0, 1);
@@ -89,9 +89,9 @@ public class TelaLogin extends Application {
 
         layoutPrincipal.getChildren().addAll(lblCabecalho, gridPane);
 
-        // Empilhar o layout principal e a imagem de fundo
+       
         StackPane root = new StackPane(backgroundPane, layoutPrincipal);
-        Scene scene = new Scene(root, 800, 600); // Tamanho maior da janela
+        Scene scene = new Scene(root, 800, 600); 
 
         primaryStage.setScene(scene);
         primaryStage.show();
